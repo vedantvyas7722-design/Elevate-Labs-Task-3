@@ -3,14 +3,17 @@
 
 Objective
 The primary objective of this task was to use a professional-grade vulnerability scanner to identify common security weaknesses on a local computer. This process includes discovering vulnerabilities, assessing their severity, and researching appropriate remediation steps.
+
 Tool Used
 * Scanner: Tenable Nessus Essentials (v10.x)
 * Operating System: Kali Linux (running in a virtual machine)
+
 Process
 1. Installation: Nessus Essentials was installed on the Kali Linux VM by downloading the .deb package from the official Tenable website.
 2. Configuration: The Nessus service was started, and the initial setup was completed through the web interface at https://localhost:8834. This included registering the product and creating an administrator account.
 3. Scanning: A "Basic Network Scan" was configured to target the local machine's IP address (*.*.*.*).
 4. Analysis: Once the scan was complete, the results were reviewed to identify vulnerabilities, prioritize them by severity, and determine the necessary remediation actions.
+
 Scan Results Summary
 The scan successfully completed and identified a total of 63 vulnerabilities. The findings are categorized by severity below. Fortunately, no "Critical" vulnerabilities were discovered.
 The distribution of vulnerabilities is as follows:
@@ -18,6 +21,7 @@ The distribution of vulnerabilities is as follows:
 * Medium: 3
 * Low: 0
 * Informational: 59
+
 Key Vulnerabilities Discovered
 The most significant vulnerabilities that require attention are listed below:
 Severity
@@ -36,35 +40,46 @@ Severity
 	--
 	Intel MEI/AMT Multiple Issues
 	Vulnerability Analysis & Remediation Plan
-This section provides a detailed analysis of the most critical findings and a clear plan for how to fix them. The primary theme among the vulnerabilities is the presence of outdated software components.
+
 1. High - Ruby RACK Denial of Service (DoS)
 * Risk Description: The installed version of Ruby RACK is vulnerable to a Denial of Service attack. An attacker could send a specially crafted request to an application using this component, causing it to crash or become unresponsive to legitimate users. With a CVSS score of 7.5, this is the most critical issue found.
 * Remediation Plan: As recommended by Nessus, the vulnerability can be fixed by upgrading the Ruby RACK component to version 2.2.14, 3.0.16, 3.1.14, or later.
+
 2. Medium - Node.js Multiple Vulnerabilities
 * Risk Description: The version of Node.js installed on the system is outdated and contains multiple known security flaws. These could potentially be exploited by an attacker to compromise the system or applications that rely on Node.js.
 * Remediation Plan: The solution is to upgrade Node.js to a patched version, such as 20.19.4, 22.17.1, 24.4.1, or later. This single update will fix a large number of underlying issues.
+
 3. Medium - Ruby REXML Denial of Service (DoS)
 * Risk Description: Similar to the RACK vulnerability, the installed Ruby REXML component is also susceptible to a Denial of Service attack. This presents a medium risk to the stability and availability of any application using this library.
 * Remediation Plan: The vulnerability can be remediated by upgrading the REXML component to version 3.3.6 or later.
 Conclusion
 The vulnerability scan was successful in identifying several key security weaknesses on the host machine. The results clearly indicate that the system's primary risks stem from outdated software dependencies (Node.js, Ruby). By following the straightforward remediation plan of updating these components, the overall security posture of the machine can be significantly improved.
+
 Interview Questions & Answers
+
 1. What is vulnerability scanning?
 Vulnerability scanning is an automated process of proactively identifying security weaknesses and flaws in computer systems, networks, or applications. The scanner uses a database of known vulnerabilities to check a target system and generates a report of its findings, which helps administrators prioritize and fix the issues.
+
 2. Difference between vulnerability scanning and penetration testing?
 A vulnerability scan is an automated, high-level process that looks for potential and known vulnerabilities. It answers the question, "What weaknesses exist?" A penetration test is a manual, in-depth process where a security professional actively tries to exploit those vulnerabilities to gain access. It answers the question, "Can these weaknesses be exploited and what can an attacker do?"
+
 3. What are some common vulnerabilities in personal computers?
 Common vulnerabilities include: outdated operating systems or software, missing security patches, weak or default passwords, misconfigured firewalls, and insecure software settings that allow for unnecessary permissions or services to run.
+
 4. How do scanners detect vulnerabilities?
 Scanners typically detect vulnerabilities by:
 * Banner Grabbing: Identifying the version numbers of running software and services and comparing them against a database of versions with known flaws.
 * Active Probing: Sending specific packets or queries to a service to see how it responds, which can reveal misconfigurations or known vulnerabilities.
 * Checking for Missing Patches: Querying the operating system to see which security patches have been installed and which are missing.
+
 5. What is CVSS?
 CVSS (Common Vulnerability Scoring System) is an open industry standard for assessing the severity of computer system security vulnerabilities. It assigns a numerical score from 0.0 to 10.0, with 10.0 being the most severe. This score helps organizations prioritize which vulnerabilities to fix first.
+
 6. How often should vulnerability scans be performed?
 The frequency depends on the environment. For critical systems, scans should be run at least weekly or even daily. For less critical systems, monthly or quarterly scans might be sufficient. It's also best practice to run a scan after any significant change to the system, such as a new software installation or a major configuration change.
+
 7. What is a false positive in vulnerability scanning?
 A false positive is when a vulnerability scanner incorrectly reports that a vulnerability exists when it actually does not. This can happen due to unusual configurations or errors in the scanner's detection logic. Security analysts must investigate findings to confirm they are real before taking action.
+
 8. How do you prioritize vulnerabilities?
 Vulnerabilities are prioritized based on risk. The most common method is to use the CVSS score, addressing Critical (9.0-10.0) and High (7.0-8.9) severity vulnerabilities first. Other factors include: the exploitability of the vulnerability, the importance of the affected asset, and whether there
